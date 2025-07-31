@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A.cities - Energia per il Futuro</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+        }
+        /* Custom Tailwind Colors based on Logo */
+        .bg-primary { background-color: #333333; } /* Dark Grey from Logo */
+        .text-primary { color: #333333; }
+        .bg-secondary { background-color: #008080; } /* Teal from Logo */
+        .text-secondary { color: #008080; }
+        .bg-accent { background-color: #4ade80; } /* Existing Green for accent */
+        .text-accent { color: #4ade80; }
+
+        /* Modal specific styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2.5rem; /* Increased padding */
+            border-radius: 1rem; /* More rounded */
+            max-width: 90%;
+            width: 700px; /* Increased max width */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.show .modal-content {
+            transform: translateY(0);
+        }
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #4a5568; /* Gray-700 */
+        }
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #008080; /* Use secondary color for spinner */
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-4 px-6 md:px-12 flex justify-between items-center rounded-b-lg">
+        <!-- Logo Image -->
+        <img src="https://content.googleapis.com/v1/files/uploaded:LogoAceaACities.png-5fbc026e-88d3-4641-af57-547301a3790b?alt=media" alt="A.cities Logo" class="h-12 md:h-16">
+        <nav>
+            <ul class="flex space-x-6">
+                <li><a href="#servizi" class="text-gray-600 hover:text-primary transition duration-300">Servizi</a></li>
+                <li><a href="#contatti" class="text-gray-600 hover:text-primary transition duration-300">Contatti</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-r from-primary to-secondary text-white py-20 px-6 md:px-12 text-center rounded-lg mx-auto mt-8 max-w-6xl shadow-xl overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <!-- Background pattern for visual interest -->
+            <svg class="w-full h-full" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <pattern id="pattern-circles" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                    <circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.1)"></circle>
+                </pattern>
+                <rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-circles)"></rect>
+            </svg>
+        </div>
+        <div class="relative z-10">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">Rivoluzioniamo l'Energia. Insieme.</h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">A.cities: la tua Energy Service Company per un futuro sostenibile.</p>
+            <a href="#servizi" class="inline-block bg-accent text-primary font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-300 ease-in-out">
+                Scopri i Nostri Servizi
+            </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servizi" class="py-16 px-6 md:px-12 max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-12 text-primary">Le Nostre Aree di Competenza</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Card 1: Energy Services (ESCO) -->
+            <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300 ease-in-out border border-gray-100">
+                <div class="text-5xl text-secondary mb-6 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block">
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/>
+                        <path d="M18 2v4a2 2 0 0 0 2 2h4"/>
+                        <path d="M8 18h.01"/>
+                        <path d="M8 14h.01"/>
+                        <path d="M12 18h.01"/>
+                        <path d="M12 14h.01"/>
+                        <path d="M16 18h.01"/>
+                        <path d="M16 14h.01"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-semibold mb-4 text-primary text-center">Servizi Energetici (ESCO)</h3>
+                <p class="text-gray-600 mb-6 text-center">
+                    Offriamo soluzioni complete per l'efficienza energetica e l'elettrificazione dei consumi per clienti industriali (C&I) e pubblici (B2G).
+                </p>
+                <button class="w-full bg-primary text-white py-3 rounded-full font-semibold hover:bg-gray-700 transition duration-300 learn-more-btn" data-topic="esco">
+                    Scopri di più
+                </button>
+            </div>
+
+            <!-- Card 2: Electric Mobility (CPO) -->
+            <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300 ease-in-out border border-gray-100">
+                <div class="text-5xl text-secondary mb-6 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block">
+                        <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.6-.4-1-1-1h-1V9c0-.6-.4-1-1-1H9c-.6 0-1 .4-1 1v4H1c-.6 0-1 .4-1 1v3c0 .6.4 1 1 1h2"/>
+                        <circle cx="7" cy="17" r="2"/>
+                        <circle cx="17" cy="17" r="2"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-semibold mb-4 text-primary text-center">Mobilità Elettrica (CPO)</h3>
+                <p class="text-gray-600 mb-6 text-center">
+                    Siamo un Charge Point Operator (CPO) dedicato allo sviluppo e alla gestione di infrastrutture di ricarica per veicoli elettrici.
+                </p>
+                <button class="w-full bg-primary text-white py-3 rounded-full font-semibold hover:bg-gray-700 transition duration-300 learn-more-btn" data-topic="mobility">
+                    Scopri di più
+                </button>
+            </div>
+
+            <!-- Card 3: Flexibility & Demand Response (BSP) -->
+            <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300 ease-in-out border border-gray-100">
+                <div class="text-5xl text-secondary mb-6 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block">
+                        <path d="M12 2v20M17 5H7M17 19H7"/>
+                        <path d="M19 10c-1.7 2.7-3 4-3 4s1.3 1.3 3 4"/>
+                        <path d="M5 10c1.7 2.7 3 4 3 4s-1.3 1.3-3 4"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-semibold mb-4 text-primary text-center">Flessibilità & Demand Response (BSP)</h3>
+                <p class="text-gray-600 mb-6 text-center">
+                    Puntiamo a diventare un Balancing Service Operator (BSP) per operare nel settore dei servizi di flessibilità e demand response.
+                </p>
+                <button class="w-full bg-primary text-white py-3 rounded-full font-semibold hover:bg-gray-700 transition duration-300 learn-more-btn" data-topic="bsp">
+                    Scopri di più
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contatti" class="bg-primary text-white py-16 px-6 md:px-12 text-center rounded-lg mx-auto mt-12 max-w-6xl shadow-xl">
+        <h2 class="text-4xl font-bold mb-6">Contattaci</h2>
+        <p class="text-xl mb-8 opacity-90">Siamo pronti a supportarti nella transizione energetica. Scrivici per maggiori informazioni!</p>
+        <a href="mailto:info@acities.it?subject=Richiesta%20informazioni%20generiche%20da%20Landing%20Page" class="inline-block bg-accent text-primary font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-300 ease-in-out">
+            Invia una Email
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 mt-12 text-center">
+        <div class="max-w-6xl mx-auto px-6 md:px-12">
+            <p>&copy; 2025 A.cities. Tutti i diritti riservati.</p>
+            <p class="mt-2">Innovazione ed Efficienza Energetica per un Futuro Sostenibile.</p>
+        </div>
+    </footer>
+
+    <!-- Modal Structure -->
+    <div id="infoModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-button" id="closeModalBtn">&times;</button>
+            <h3 id="modalTitle" class="text-3xl font-bold mb-6 text-primary"></h3>
+            <div id="modalContentText" class="text-gray-700 leading-relaxed mb-8">
+                <!-- Content will be loaded here -->
+            </div>
+            <a id="specificRequestLink" class="inline-block bg-secondary text-white py-3 px-6 rounded-full font-semibold hover:bg-teal-700 transition duration-300">
+                Richiedi informazioni specifiche
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const learnMoreButtons = document.querySelectorAll('.learn-more-btn');
+            const infoModal = document.getElementById('infoModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContentText = document.getElementById('modalContentText');
+            const specificRequestLink = document.getElementById('specificRequestLink');
+
+            // Function to simulate Gemini API response
+            async function getGeminiResponse(topic) {
+                // Simulate network delay
+                await new Promise(resolve => setTimeout(resolve, 800));
+
+                let response = '';
+                let title = '';
+
+                switch (topic) {
+                    case 'esco':
+                        title = 'Servizi Energetici (ESCO)';
+                        response = `A.cities, in qualità di Energy Service Company (ESCO), si impegna a fornire soluzioni all'avanguardia per l'efficienza energetica e l'elettrificazione dei consumi. Ci rivolgiamo a un'ampia gamma di clienti, inclusi i settori Industriale e Commerciale (C&I) e le Pubbliche Amministrazioni (B2G). Il nostro approccio si basa sull'analisi approfondita dei consumi, l'identificazione di opportunità di risparmio e l'implementazione di interventi mirati, come l'installazione di sistemi fotovoltaici, l'ottimizzazione degli impianti di riscaldamento e raffreddamento, e l'adozione di tecnologie a basso consumo energetico. L'obiettivo è ridurre significativamente i costi operativi e l'impatto ambientale, garantendo al contempo un ritorno sull'investimento tangibile per i nostri clienti.`;
+                        break;
+                    case 'mobility':
+                        title = 'Mobilità Elettrica (CPO)';
+                        response = `A.cities opera come Charge Point Operator (CPO), svolgendo un ruolo chiave nello sviluppo e nella gestione delle infrastrutture di ricarica per veicoli elettrici. La nostra missione è facilitare la transizione verso una mobilità più sostenibile, offrendo soluzioni di ricarica affidabili, accessibili e tecnologicamente avanzate. Questo include l'installazione di stazioni di ricarica in aree pubbliche e private, la manutenzione delle infrastrutture e la fornitura di servizi di supporto agli utenti. Contribuiamo attivamente alla creazione di una rete di ricarica capillare e interoperabile, essenziale per l'adozione diffusa dei veicoli elettrici e per un futuro a emissioni zero.`;
+                        break;
+                    case 'bsp':
+                        title = 'Flessibilità & Demand Response (BSP)';
+                        response = `A.cities ambisce a diventare un Balancing Service Operator (BSP), con l'obiettivo di partecipare attivamente al mercato dei servizi di flessibilità e demand response. Questo settore è cruciale per la stabilità e l'efficienza delle reti elettriche moderne, consentendo di bilanciare la domanda e l'offerta di energia in tempo reale. Attraverso l'aggregazione e la gestione intelligente dei carichi energetici dei nostri clienti, possiamo offrire alla rete la capacità di modulare i consumi in risposta ai segnali del mercato, contribuendo a integrare le fonti rinnovabili e a ottimizzare l'utilizzo dell'energia. Questo non solo genera nuove opportunità di ricavo per i partecipanti, ma rafforza anche la resilienza del sistema energetico nazionale.`;
+                        break;
+                    default:
+                        title = 'Informazioni';
+                        response = 'Contenuto non disponibile per questo argomento.';
+                }
+                return { title, response };
+            }
+
+            learnMoreButtons.forEach(button => {
+                button.addEventListener('click', async (event) => {
+                    const topic = event.target.dataset.topic;
+                    modalTitle.innerHTML = `<span class="loading-spinner"></span> Caricamento...`;
+                    modalContentText.textContent = ''; // Clear previous content
+                    specificRequestLink.style.display = 'none'; // Hide link during loading
+
+                    infoModal.classList.add('show');
+
+                    try {
+                        const { title, response } = await getGeminiResponse(topic);
+                        modalTitle.textContent = title;
+                        modalContentText.textContent = response;
+                        specificRequestLink.style.display = 'inline-block'; // Show link after content loads
+                        specificRequestLink.href = `mailto:info@acities.it?subject=Richiesta%20informazioni%20specifiche%20su%20${encodeURIComponent(title)}`;
+                    } catch (error) {
+                        modalTitle.textContent = 'Errore';
+                        modalContentText.textContent = 'Si è verificato un errore durante il caricamento delle informazioni. Riprova più tardi.';
+                        specificRequestLink.style.display = 'none';
+                        console.error('Error fetching content:', error);
+                    }
+                });
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                infoModal.classList.remove('show');
+            });
+
+            infoModal.addEventListener('click', (event) => {
+                if (event.target === infoModal) {
+                    infoModal.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
